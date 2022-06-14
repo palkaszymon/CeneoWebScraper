@@ -52,3 +52,15 @@ class Product:
             os.makedirs("app/products")
         with open(f"app/products/{self.product_id}.json", "w", encoding="UTF-8") as jf:
             json.dump(self.opinions, jf, indent=4, ensure_ascii=False)
+    
+    def to_dict(self):
+        product_dict = {
+            "product_id": self.product_id,
+            "product_name": self.product_name,
+            "opinions": self.opinions,
+            "opinions_count": self.opinions_count,
+            "pros_count": self.pros_count,
+            "cons_count": self.cons_count,
+            "average_score": self.average_score,
+        }
+        return product_dict
