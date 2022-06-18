@@ -1,10 +1,10 @@
 from app.utils import get_item
 from app.paremeters import selectors
 class Opinion:
-    def __init__(self, product_id=0, author="", recommendation=None, stars=0, content="", useful=0, useless=0, publish_date=None, purchase_date=None, pros=[], cons=[]):
-        self.product_id = product_id
+    def __init__(self, opinion_id=0, author="", recommendation=None, stars=0, content="", useful=0, useless=0, publish_date=None, purchase_date=None, pros=[], cons=[]):
+        self.opinion_id = opinion_id
         self.author = author
-        self.reccomendation = recommendation
+        self.recommendation = recommendation
         self.stars = stars
         self.content = content
         self.useful = useful
@@ -13,13 +13,12 @@ class Opinion:
         self.purchase_date = purchase_date
         self.pros = pros
         self.cons = cons
-        return self
 
     def __str__(self):
-        pass
+        return f"opinion_id: {self.opinion_id}<br>" + "<br>".join(f"{key}: {str(getattr(self, key))}" for key in selectors.keys())
 
     def __repr__(self):
-        pass
+        return f"Opinion(opinion_id={self.opinion_id}, " + ", ".join(f"{key}={str(getattr(self, key))}" for key in selectors.keys()) + ")"
 
     def to_dict(self):
         opinion_dict ={
@@ -40,7 +39,6 @@ class Opinion:
     def extract_opinion(self, opinion):
         for key, value in selectors.items():
             setattr(self, key, get_item(opinion, *value))
-        self.opinion_id = opinion
-        ["data-entry-id"]
+        self.opinion_id = opinion["data-entry-id"]
         return self
                 
